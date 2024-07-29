@@ -11,6 +11,11 @@ I really wants to build a game.  I'd also like to leverage block chain for both 
   * https://www.rubbled.io/
 * Example of blockchain platform for API
   * https://www.orbs.com/execution-services/
+* Single player experience
+  * There will be an AI, maybe a campaign.
+* UI
+  * A modest UI will be provided.
+  * A market could exist for upgraded UI assets, or different architecture.   
 ## Theme
 * This is an "army builder".   Could be medieval, modern, or space fleets
 * At the simple level you build armies from a set of units.
