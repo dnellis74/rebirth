@@ -1,2 +1,2 @@
-# rebirth
-A 4x generative game
+# idea bucket
+This is Dave's idea bucket
