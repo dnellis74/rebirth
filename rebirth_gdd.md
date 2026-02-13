@@ -16,21 +16,6 @@
 - Exploration framed as planetary observation rather than expansion
 
 ---
-
-## Core Thesis
-
-We do not need aliens to encounter difference. We do not need warp drives to justify optimism. We do not need to wait centuries for moral maturity.
-
-Earth already contains ecological complexity equal to any imagined alien biosphere. Humanity already contains cultural diversity as radical as any extraterrestrial civilization.
-
-Witness Earth attempts to recreate the awe of space exploration using what already exists:
-
-- A damaged but resilient planet
-- Divergent human cultures
-- An observing intelligence confronting its own legacy
-
-The frontier is not elsewhere. It is here.
-
 ## Philosophical Foundation: Optimism Without Escape
 
 Witness Earth draws tonal inspiration from Star Trek, particularly its moral optimism. Star Trek presents a humanity that has overcome scarcity, internal division, and planetary conflict. Scientific inquiry, diplomacy, and pluralism are treated as civilizational achievements.
@@ -70,6 +55,22 @@ This reframes the emotional architecture of exploration:
 | Expansion                     | Restoration                     |
 
 Wonder arises from attention rather than conquest.
+
+---
+
+## Core Thesis
+
+We do not need aliens to encounter difference. We do not need warp drives to justify optimism. We do not need to wait centuries for moral maturity.
+
+Earth already contains ecological complexity equal to any imagined alien biosphere. Humanity already contains cultural diversity as radical as any extraterrestrial civilization.
+
+Witness Earth attempts to recreate the awe of space exploration using what already exists:
+
+- A damaged but resilient planet
+- Divergent human cultures
+- An observing intelligence confronting its own legacy
+
+The frontier is not elsewhere. It is here.
 
 ---
 
