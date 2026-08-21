@@ -28,6 +28,38 @@ tech chain is crystal-heavy. Crystal is the binding resource of this entire phas
 
 ---
 
+## Score checkpoints
+
+Score is contract-defined and linear: `tech level x (id+1) x 15`, `1,000 flat per
+planet`, `building level x (id+1) x 10`, `defense count x (id+1) x 2`,
+`ship count x (id+1) x 4`. Following this guide's build targets produces roughly
+these scores at each settlement **(derived estimates, not targets to chase)**:
+
+| Settling planet | Astro bought | Rough score at that moment |
+|:---------------:|:------------:|:--------------------------:|
+| 2 (ice) | 1 | 3,800 - 4,600 |
+| 3 (crystal) | 2 | 5,500 - 7,000 |
+| 4 (hot) | 3 | 8,500 - 10,000 |
+| Phase exit (Astro 4) | 4 | 11,000 - 13,000 |
+
+If your score is well below the band for the planet you are about to settle, the
+economy underneath is thinner than the guide assumes; build first. Well above it,
+and you are likely carrying score-expensive fleet or defense the plan does not
+call for yet.
+
+Two properties of the formula worth knowing at settlement time:
+
+- Each colony adds its 1,000 flat points the moment it lands, a 15-25% jump at
+  these sizes. Your legal attacker ceiling (1.5x score) widens by the same
+  proportion before the colony produces anything, so land with the Heavy Laser
+  pair funded and ready to ferry.
+- Score is a progress marker, not a safety guarantee. Fleet is score-cheap
+  (a Light Fighter is 8 points), so an attacker at the top of your 1.5x band can
+  field far more military than the score gap suggests. The defense doctrine, not
+  the score, is what protects the planet.
+
+---
+
 ## Site selection
 
 Temperature is permanent; everything else can be rebuilt.
@@ -175,6 +207,8 @@ Do not buy Astrophysics 4 until all of these hold:
 - [ ] All four planets wearing their Heavy Laser pairs
 - [ ] Ferry loop runs on schedule, not on attention
 - [ ] Empire raw output at or above ~150k/day
+- [ ] Score in the 11,000 - 13,000 range (a diagnostic that the above are real,
+      not a goal in itself)
 
 The Cruiser line doubles as the raid economy. Cruisers take zero losses against
 fighter-tier defense (max incoming hit is 7.4% of hull, under the 30% threshold),
