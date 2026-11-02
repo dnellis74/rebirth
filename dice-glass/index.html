@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pitch for makers and partners: a shot glass with printed d20 strips.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>The Dice Glass</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a maker's spec sheet. One reading column, a split hero with a working glass, stage rows that pair a real print render with what it taught. */
+:root {
+  --bg: #ECF0EE;        /* clear glass, slightly cool */
+  --surface: #FFFFFF;
+  --ink: #15201B;
+  --muted: #55635C;
+  --rule: #C7D2CC;
+  --amber: #B06C0A;     /* beer, for large type and fills */
+  --amber-ink: #8A5205; /* beer, for small text */
+  --beer: #E3A63A;
+  --beer-deep: #C98A22;
+  --foam: #FFF8E6;
+  --glass: rgba(21, 32, 27, 0.55);
+  --glass-fill: rgba(255, 255, 255, 0.55);
+  --solid-glass: rgba(21, 32, 27, 0.10);
+  --strip-bg: rgba(255, 255, 255, 0.80);
+  --strip-ink: #111111;
+  --hit: #B3261E;
+  --paper: #FFFFFF;
+  --chip: #E1E8E4;
+
+  --f-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --s1: 0.875rem; --s2: 1rem; --s3: 1.125rem; --s4: 1.5rem; --s5: 2.25rem; --s6: 3.5rem; --s7: 5rem;
+  --radius: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1311; --surface: #161E1A; --ink: #E5ECE8; --muted: #9AA8A1; --rule: #2B3631;
+    --amber: #EAA941; --amber-ink: #F0BA5C; --beer: #C98A22; --beer-deep: #A86F14; --foam: #EFE3C2;
+    --glass: rgba(229, 236, 232, 0.55); --glass-fill: rgba(229, 236, 232, 0.06); --solid-glass: rgba(229, 236, 232, 0.12);
+    --hit: #FF8A80; --paper: #FFFFFF; --chip: #232D28;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1311; --surface: #161E1A; --ink: #E5ECE8; --muted: #9AA8A1; --rule: #2B3631;
+  --amber: #EAA941; --amber-ink: #F0BA5C; --beer: #C98A22; --beer-deep: #A86F14; --foam: #EFE3C2;
+  --glass: rgba(229, 236, 232, 0.55); --glass-fill: rgba(229, 236, 232, 0.06); --solid-glass: rgba(229, 236, 232, 0.12);
+  --hit: #FF8A80; --paper: #FFFFFF; --chip: #232D28;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--s3); line-height: 1.6;
+}
+.wrap {
+  max-width: 1100px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 2.5rem 4rem;
+  display: grid; gap: 4.5rem;
+}
+h1, h2, h3 { font-family: var(--f-display); font-weight: 800; line-height: 1.02; text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+h2 { font-size: var(--s6); }
+h3 { font-size: var(--s4); font-weight: 700; letter-spacing: 0.01em; }
+p { margin: 0; max-width: 66ch; }
+a { color: var(--amber-ink); text-underline-offset: 0.18em; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.eyebrow { font-family: var(--f-mono); font-size: var(--s1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--f-mono); font-size: 0.92em; }
+.lede { font-size: var(--s4); line-height: 1.4; max-width: 34ch; }
+.stack { display: grid; gap: 1.1rem; align-content: start; }
+.section-head { display: grid; gap: 0.6rem; border-top: 2px solid var(--ink); padding-top: 1rem; }
+.tag { display: inline-block; font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 0.15rem 0.5rem; border-radius: 3px; background: var(--chip); color: var(--muted); vertical-align: 0.15em; }
+.tag.read { background: transparent; border: 1px solid var(--amber); color: var(--amber-ink); }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2.5rem; align-items: center; }
+.hero h1 { font-size: clamp(3.5rem, 9vw, 7rem); }
+.hero h1 .d { color: var(--amber); }
+.hero .stack { gap: 1.4rem; }
+.logline { font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.32; max-width: 30ch; font-weight: 700; }
+.demo { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1.25rem; display: grid; gap: 1rem; justify-items: center; }
+.demo svg { width: 100%; max-width: 260px; height: auto; display: block; }
+.readout { display: flex; align-items: baseline; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.readout .num { font-family: var(--f-display); font-weight: 800; font-size: 4.5rem; line-height: 1; color: var(--amber); min-width: 2ch; text-align: center; font-variant-numeric: tabular-nums; }
+.readout .lbl { font-family: var(--f-mono); font-size: var(--s1); color: var(--muted); max-width: 18ch; }
+.controls { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+button { font: 700 var(--s2) var(--f-body); padding: 0.6rem 1.1rem; border-radius: 4px; cursor: pointer;
+  border: 2px solid var(--ink); background: var(--ink); color: var(--bg); }
+button.ghost { background: transparent; color: var(--ink); }
+button:hover { filter: brightness(1.12); }
+.slider { width: 100%; display: grid; gap: 0.3rem; }
+.slider label { font-family: var(--f-mono); font-size: var(--s1); color: var(--muted); display: flex; justify-content: space-between; }
+input[type=range] { width: 100%; accent-color: var(--amber); }
+.fine { font-size: var(--s1); color: var(--muted); max-width: 60ch; }
+
+/* Pitch block */
+.pitch { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; }
+.pitch .big { font-size: var(--s4); line-height: 1.45; }
+.facts { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.facts div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--rule); }
+.facts dt { font-family: var(--f-mono); font-size: var(--s1); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; padding-top: 0.15rem; }
+.facts dd { margin: 0; }
+
+/* Inspiration */
+.inspo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+.compare { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.compare > * { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--rule); font-size: var(--s2); }
+.compare .h { font-family: var(--f-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.compare .k { font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); }
+.compare > *:nth-last-child(-n+3) { border-bottom: 0; }
+
+/* Evolution */
+.stages { display: grid; gap: 2.25rem; counter-reset: stage; }
+.stage { display: grid; grid-template-columns: 4.5rem minmax(0, 300px) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+.stage .no { font-family: var(--f-display); font-weight: 800; font-size: var(--s6); line-height: 0.9; color: var(--amber); }
+.stage figure { margin: 0; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 0.6rem; }
+.stage figure img { display: block; width: 100%; height: auto; max-height: 300px; object-fit: contain; }
+.stage .body { display: grid; gap: 0.6rem; min-width: 0; }
+.stage .learned { border-left: 3px solid var(--amber); padding-left: 0.9rem; color: var(--ink); }
+.stage .learned b { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber-ink); display: block; }
+.stage.current figure { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+/* Tables */
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: var(--s2); }
+th, td { text-align: left; padding: 0.6rem 0.85rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--f-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td.n { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cols2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+
+/* Numbers cards */
+.keys { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.key { border-top: 3px solid var(--ink); padding-top: 0.6rem; display: grid; gap: 0.3rem; align-content: start; }
+.key .v { font-family: var(--f-display); font-weight: 800; font-size: var(--s5); line-height: 1; font-variant-numeric: tabular-nums; }
+.key .v small { font-size: 0.5em; font-weight: 700; color: var(--muted); }
+.key p { font-size: var(--s2); color: var(--muted); }
+
+/* Names */
+.names { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; }
+.name { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1rem 1.1rem; display: grid; gap: 0.35rem; align-content: start; }
+.name strong { font-family: var(--f-display); font-size: var(--s5); font-weight: 800; line-height: 1; }
+.name span { font-size: var(--s2); color: var(--muted); }
+
+/* Launch steps */
+.steps { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.steps li { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+.steps { list-style: none; padding: 0; margin: 0; counter-reset: st; }
+.steps li::before { counter-increment: st; content: counter(st); font-family: var(--f-display); font-weight: 800; font-size: var(--s5); line-height: 1; color: var(--amber); }
+.steps h3 { font-size: var(--s3); font-family: var(--f-body); font-weight: 700; letter-spacing: 0; margin-bottom: 0.2rem; }
+.steps p { font-size: var(--s2); }
+.note { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--hit); border-radius: 4px; padding: 1rem 1.1rem; display: grid; gap: 0.5rem; }
+.note h3 { font-size: var(--s3); font-family: var(--f-body); font-weight: 700; letter-spacing: 0; }
+.note p { font-size: var(--s2); }
+
+.open { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0.75rem 2rem; padding: 0; margin: 0; list-style: none; }
+.open li { border-top: 1px solid var(--rule); padding-top: 0.6rem; font-size: var(--s2); }
+.open li b { display: block; }
+.sources { font-size: var(--s1); color: var(--muted); display: grid; gap: 0.3rem; padding-left: 1.2rem; margin: 0; }
+footer { font-size: var(--s1); color: var(--muted); border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+@media (max-width: 860px) {
+  .hero, .pitch, .inspo, .cols2 { grid-template-columns: minmax(0, 1fr); }
+  .stage { grid-template-columns: 3rem minmax(0, 1fr); }
+  .stage figure { grid-column: 2; }
+  .stage .body { grid-column: 2; }
+  .stage .no { font-size: var(--s5); }
+  .keys { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  h2 { font-size: var(--s5); }
+}
+@media (max-width: 460px) {
+  .facts div { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+  .compare { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .compare .k { grid-column: 1 / -1; padding-bottom: 0; border-bottom: 0; }
+  .compare .h.blank { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+#liquid, #liquidTop, #levelLine, #levelTag { transition: all 0.45s ease; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="stack">
+    <p class="eyebrow">Working title / pitch for makers and partners / Salida, Colorado</p>
+    <h1>The Dice <span class="d">Glass</span></h1>
+    <p class="logline">A drinking glass that rolls a d20. Take a sip, set it down, and read the number at the beer line.</p>
+    <p>Three identical printed strips go around a tall shot glass. Each strip is divided into 20 bands that hold the same volume of beer, with the numbers in shuffled order. Every sip moves the liquid to a new band, and that band is your roll.</p>
+  </div>
+  <div class="demo" aria-label="Interactive glass demo">
+    <svg id="glass" viewBox="0 0 240 440" role="img" aria-labelledby="gtitle">
+      <title id="gtitle">YULEER 2 oz shot glass with the d20 strip; the beer line marks the current roll</title>
+    </svg>
+    <div class="readout" aria-live="polite">
+      <span class="num" id="rollNum">12</span>
+      <span class="lbl" id="rollLbl">Full glass. Take a sip.</span>
+    </div>
+    <div class="controls">
+      <button type="button" id="sipBtn">Take a sip</button>
+      <button type="button" class="ghost" id="refillBtn">Refill</button>
+    </div>
+    <div class="slider">
+      <label for="drunk"><span>Drunk so far</span><span id="drunkVal">0.0 mL of 53.3</span></label>
+      <input type="range" id="drunk" min="0" max="53.3" step="0.1" value="0">
+    </div>
+    <p class="fine">Drawn to scale from the current YULEER layout. Demo sips are random sizes between about 6 and 20 mL, for illustration only.</p>
+  </div>
+</header>
+
+<!-- ELEVATOR PITCH -->
+<section class="pitch" aria-labelledby="pitch-h">
+  <div class="stack">
+    <div class="section-head"><p class="eyebrow">Elevator pitch</p><h2 id="pitch-h">A die you drink</h2></div>
+    <p class="big">The Dice Glass puts a d20 in the glass you are already holding. It is cheap to make (an off-the-shelf shot glass plus printed strips), it needs one rule to explain, and it plugs into any game that uses a d20.</p>
+    <p>The math is done and the print files come from a parametric generator, so the same design can be resized for any tapered glass once its dimensions are measured.</p>
+  </div>
+  <dl class="facts">
+    <div><dt>The rule</dt><dd>Sip. Set the glass down. Read the number at the beer line.</dd></div>
+    <div><dt>Glass</dt><dd>YULEER 2 oz tall shot glass, 3.9 in tall, 1.6 in top, 1.3 in bottom (listed). 12 ordered.</dd></div>
+    <div><dt>Strip</dt><dd>20 equal-volume bands, about 2.7 mL each. 0.45 in wide at the base, 3.77 in tall. Three identical copies around the glass.</dd></div>
+    <div><dt>Number layout</dt><dd>Top half holds 6 to 15. Bottom half holds 1 to 5 and 16 to 20. Early sips roll middle values; the last half rolls extremes.</dd></div>
+    <div><dt>Status</dt><dd>Design and print files done. Physical prototype waiting on one measurement (inside floor height).</dd></div>
+  </dl>
+</section>
+
+<!-- INSPIRATION -->
+<section class="stack" aria-labelledby="inspo-h">
+  <div class="section-head"><p class="eyebrow">Where it came from</p><h2 id="inspo-h">Beer golf, with dice</h2></div>
+  <div class="inspo">
+    <div class="stack">
+      <p>The starting point was beer golf pint glasses. One commercial version, <a href="https://www.uncommongoods.com/product/beer-golf" target="_blank" rel="noopener">Beer Golf from Uncommon Goods</a>, prints a nine-hole course on two 16 oz pint glasses. Players fill to a "start here" line, take one drink per hole trying to stop as close to the pin as possible, and the lowest score after nine holes wins. The set sells for $34 with scorecard coasters and a pencil.</p>
+      <p>The question was whether the same trick, marks on the glass read against the liquid level, could produce a random number instead of a skill score. The d20 is the core die in Dungeons &amp; Dragons and similar tabletop games, so the target became a fair-enough d20 per sip.</p>
+    </div>
+    <div class="compare" role="table" aria-label="Beer golf compared with the Dice Glass">
+      <span class="h blank" role="columnheader"></span><span class="h" role="columnheader">Beer golf</span><span class="h" role="columnheader">Dice Glass</span>
+      <span class="k" role="rowheader">Glass</span><span role="cell">16 oz pint</span><span role="cell">2 oz tall shot (pint version also designed)</span>
+      <span class="k" role="rowheader">Marks</span><span role="cell">Nine holes</span><span role="cell">20 numbered bands</span>
+      <span class="k" role="rowheader">Per drink</span><span role="cell">One drink per hole</span><span role="cell">One roll per sip</span>
+      <span class="k" role="rowheader">Outcome</span><span role="cell">Skill: lowest score wins</span><span role="cell">Mostly chance; a player can learn the strip</span>
+    </div>
+  </div>
+</section>
+
+<!-- EVOLUTION -->
+<section class="stack" aria-labelledby="evo-h">
+  <div class="section-head"><p class="eyebrow">What has been done</p><h2 id="evo-h">Six designs, one idea</h2>
+    <p>Each stage below is a real print render from the generator. Each one fixed a problem the previous one exposed.</p></div>
+  <div class="stages">
+
+    <article class="stage">
+      <span class="no">1</span>
+      <figure><img src="img/v1-scale.png" alt="Single sticker with numbers 1 to 20 in order, bands thinner toward the top" loading="lazy"></figure>
+      <div class="body">
+        <h3>One scale per die</h3>
+        <p>A sticker for each die (d4 to d20) with bands of equal volume from empty to a fill line. The bands get thinner toward the rim because the glass widens.</p>
+        <p class="learned"><b>Learned</b>Drinking the whole glass always lands on the bottom number. The result is predictable, and it takes a full pint to get one roll.</p>
+      </div>
+    </article>
+
+    <article class="stage">
+      <span class="no">2</span>
+      <figure><img src="img/v2-columns.png" alt="Sheet of four stickers, each with five columns of shuffled numbers" loading="lazy"></figure>
+      <div class="body">
+        <h3>Random columns all the way around</h3>
+        <p>Twenty columns, each its own shuffle of 1 to 20, arranged as a Latin rectangle so no number repeats at any height. Draining the glass shows every number at once, so the fill level alone gives nothing away.</p>
+        <p class="learned"><b>Learned</b>It needs a rule for which column counts, and it is still one roll per pint. A wall of numbers reads like a chart.</p>
+      </div>
+    </article>
+
+    <article class="stage">
+      <span class="no">3</span>
+      <figure><img src="img/v3-letters.png" alt="The same sheet with letters A to T above the columns" loading="lazy"></figure>
+      <div class="body">
+        <h3>Lettered columns</h3>
+        <p>Columns labeled A to T above the fill line. Pick a letter before drinking, then read your column at the surface.</p>
+        <p class="learned"><b>Learned</b>Two steps to explain. Tabled.</p>
+      </div>
+    </article>
+
+    <article class="stage">
+      <span class="no">4</span>
+      <figure><img src="img/v4-lattice.png" alt="Three stickers with nine small d20 patches stepping up diagonally" loading="lazy"></figure>
+      <div class="body">
+        <h3>Nine-patch lattice</h3>
+        <p>Borrowing beer golf's nine holes: nine small d20 patches in three overlapping tiers, so every liquid level falls inside at least one patch.</p>
+        <p class="learned"><b>Learned</b>The physics check. Bands can't be much thinner than the beer meniscus (about 3.3 mm), so a d20 patch is 66 mm tall and a sip only moves the level about two bands. Overlapping patches also need a "which one" rule.</p>
+      </div>
+    </article>
+
+    <article class="stage">
+      <span class="no">5</span>
+      <figure><img src="img/v5-pint-strip.png" alt="Three identical narrow strips with 40 numbered bands" loading="lazy"></figure>
+      <div class="body">
+        <h3>One strip, repeated</h3>
+        <p>A single ruler-style strip, printed three times around the glass so every side reads the same. On a pint: 40 bands, each number twice, copies of a number at least 10 bands apart. About one new number per sip. Added a paper placement guide and accounted for the solid base.</p>
+        <p class="learned"><b>Learned</b>One rule, no choices, reads like a measuring cup. This is the design.</p>
+      </div>
+    </article>
+
+    <article class="stage current">
+      <span class="no">6</span>
+      <figure><img src="img/v6-shot-strip.png" alt="Three identical strips for the shot glass, middle numbers on top and extremes below" loading="lazy"></figure>
+      <div class="body">
+        <h3>Shot glass, zoned <span class="tag read">current</span></h3>
+        <p>The strip moved to a tall 2 oz shot glass: 20 bands, each number once. The tall, narrow glass gives enough depth for one row at meniscus-sized bands. Numbers are zoned: 6 to 15 in the top half, 1 to 5 and 16 to 20 in the bottom half, so draining the glass is a gamble rather than a guaranteed high roll.</p>
+        <p class="learned"><b>Learned</b>A 2 oz glass gives about 2 to 3 rolls per fill at normal sip sizes, so short games fit best.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="stack" aria-labelledby="num-h">
+  <div class="section-head"><p class="eyebrow">For makers</p><h2 id="num-h">The numbers behind the strip</h2></div>
+  <div class="keys">
+    <div class="key"><span class="v">3.3<small> mm</small></span><p>Beer meniscus rise at the glass wall, from a lager surface tension of 55 mN/m. Sets the minimum band height.</p></div>
+    <div class="key"><span class="v">16 to 29<small> mL</small></span><p>Average sip sizes in published drinking studies (water and a soft drink).</p></div>
+    <div class="key"><span class="v">2.7<small> mL</small></span><p>Volume per band on the YULEER glass, filled 1/4 in below the rim.</p></div>
+    <div class="key"><span class="v">66<small> mm</small></span><p>Liquid depth needed for one d20 row at meniscus-height bands. Volume doesn't matter; depth does.</p></div>
+  </div>
+  <div class="cols2">
+    <div class="stack">
+      <h3>How the strip is computed</h3>
+      <p>The glass is modeled as a cone frustum (outer radii, height, wall, inside floor). Band edges are solved so each band holds 1/20 of the fill volume. The strip is drawn on the glass's flattened cone surface, so it wraps without wrinkling. The generator checks each layout before writing it: every number appears the right number of times, zones hold their assigned numbers, and the guide length matches the glass circumference.</p>
+      <p>Output is an SVG print sheet (three strips, placement guide, instructions) and a CSV of band heights. Presets exist for the YULEER shot glass, a Barconic shot glass and a generic pint. A new glass needs five measurements.</p>
+    </div>
+    <div class="tbl">
+      <table>
+        <caption class="eyebrow" style="text-align:left;padding:0.7rem 0.85rem 0">YULEER preset</caption>
+        <thead><tr><th>Input</th><th>Value</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Height, top, bottom</td><td class="n">3.9 / 1.6 / 1.3 in</td><td>Product listing</td></tr>
+          <tr><td>Capacity</td><td class="n">2 oz</td><td>Product listing</td></tr>
+          <tr><td>Wall</td><td class="n">0.12 in</td><td>Estimate</td></tr>
+          <tr><td>Inside floor</td><td class="n">0.95 in</td><td>Estimate from capacity; to measure</td></tr>
+          <tr><td>Fill line</td><td class="n">3.65 in (1.8 oz)</td><td>Design choice</td></tr>
+          <tr><td>Band height</td><td class="n">2.9 to 4.1 mm</td><td>Computed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="stack">
+    <h3>One game tested so far: three sips, closest to 30</h3>
+    <p>Three sips, add the numbers, closest to 30 without going over. Simulated with random sip sizes (spread assumed at 30 to 50 percent, since no data on one person's sip-to-sip variation turned up).</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Median sip</th><th>Glass empties before 3rd read</th><th>Over 30, zoned strip</th><th>Mean total</th></tr></thead>
+        <tbody>
+          <tr><td class="n">8 mL</td><td class="n">0 to 0.5%</td><td class="n">50 to 56%</td><td class="n">30.5 to 31.4</td></tr>
+          <tr><td class="n">12 mL</td><td class="n">2 to 13%</td><td class="n">55 to 60%</td><td class="n">31.5 to 31.8</td></tr>
+          <tr><td class="n">16 mL</td><td class="n">33 to 45%</td><td class="n">47 to 52%</td><td class="n">29.3 to 30.5</td></tr>
+          <tr><td class="n">20 mL</td><td class="n">75 to 80%</td><td class="n">34 to 47%</td><td class="n">27.1 to 29.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><span class="tag read">Our read</span> Thirty is a fair push-your-luck target. The shot glass is too small for three normal sips, so the rule set needs either "hit bottom and you bust", the pint version, or a two-sip game.</p>
+  </div>
+</section>
+
+<!-- NAMES -->
+<section class="stack" aria-labelledby="names-h">
+  <div class="section-head"><p class="eyebrow">Name candidates</p><h2 id="names-h">It still needs a name</h2>
+    <p class="fine">Suggestions only. None has been checked for trademarks or existing products.</p></div>
+  <div class="names">
+    <div class="name"><strong>Critical Sip</strong><span>Plays on the "critical hit" of rolling a natural 20.</span></div>
+    <div class="name"><strong>Waterline</strong><span>Names the one thing you read. Plain and easy to remember.</span></div>
+    <div class="name"><strong>Sip &amp; Roll</strong><span>Says the rule in three words.</span></div>
+    <div class="name"><strong>Dregs &amp; Dice</strong><span>The bottom of the glass is where the extremes live.</span></div>
+    <div class="name"><strong>Last Drop d20</strong><span>Points at the gamble of the final sip.</span></div>
+  </div>
+</section>
+
+<!-- SOFT LAUNCH -->
+<section class="stack" aria-labelledby="launch-h">
+  <div class="section-head"><p class="eyebrow">Soft launch</p><h2 id="launch-h">Pre-stickered glass sets</h2>
+    <p>Sell finished glasses with strips already applied, in small sets, before deciding on a larger run.</p></div>
+
+  <div class="cols2">
+    <div class="stack">
+      <h3>Rough unit cost, before shipping, labor and packaging</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Item</th><th>Basis</th><th>Per glass</th></tr></thead>
+          <tbody>
+            <tr><td>YULEER glass</td><td>12 bought for under $23</td><td class="n">under $1.92</td></tr>
+            <tr><td>Strips, UV DTF</td><td>22 x 12 in sheet, $29.95, about 96 strips (32 glasses)</td><td class="n">about $0.94</td></tr>
+            <tr><td>Strips, clear vinyl</td><td>StickerApp, 39 stickers for $32 (smallest preset), 3 per glass</td><td class="n">about $2.46</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fine">Strip yield is a simple grid estimate (0.55 x 3.77 in strips, 1/8 in gaps); nesting could fit more. Vendor prices as listed when checked in October 2026.</p>
+    </div>
+    <div class="stack">
+      <h3>Two ways to print the strips</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th></th><th>UV DTF transfer</th><th>Clear vinyl sticker</th></tr></thead>
+          <tbody>
+            <tr><td>Look on glass</td><td>Ink only, no film edge</td><td>Visible clear film</td></tr>
+            <tr><td>Care (vendor stated)</td><td>Hand wash only</td><td>Dishwasher safe (StickerApp)</td></tr>
+            <tr><td>White ink</td><td>White-backed option offered</td><td>CMYK plus white</td></tr>
+            <tr><td>Files</td><td>PNG at exact size, 300 DPI</td><td>Each strip as its own die-cut file</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><span class="tag read">Our read</span> White behind the digits keeps them readable against dark beer. Black digits alone will likely disappear in a stout.</p>
+    </div>
+  </div>
+
+  <div class="cols2">
+    <ol class="steps">
+      <li><div><h3>Measure and paper-test</h3><p>Measure the YULEER inside floor height, regenerate the strips, and tape paper strips on a glass. Check readability at arm's length with light and dark beer.</p></div></li>
+      <li><div><h3>One small print order</h3><p>Order a single UV DTF sheet or the smallest vinyl batch. Apply to the 12 glasses on hand.</p></div></li>
+      <li><div><h3>Durability check</h3><p>Run a few glasses through a normal washing routine and note wear on the digits.</p></div></li>
+      <li><div><h3>Hand-out test</h3><p>Give stickered glasses to a few people with no explanation and see whether they figure out the rule. Run a game night with the three-sip game.</p></div></li>
+      <li><div><h3>Sell a first batch of sets</h3><p>Small sets with a rules card, sold locally or online. For a larger run, a crowdfunding campaign: Kickstarter charges 5% of funds on a successful project plus about 3 to 5% in payment processing, and nothing if the goal isn't met.</p></div></li>
+    </ol>
+    <div class="stack">
+      <div class="note">
+        <h3>Decoration near the rim</h3>
+        <p>Canada's Glazed Ceramics and Glassware Regulations set lead and cadmium limits for drinking vessels with an exterior decorative pattern within 20 mm of the rim. The lip-and-rim test method they cite is ASTM C927. The current strip ends about 3 mm below the rim, inside that zone.</p>
+        <p>For sold glasses, two options: get lead- and cadmium-free documentation for the ink or film from the printer, or stop the strip at least 20 mm below the rim, which shortens the usable liquid column on a shot glass. Checking the US rules for decorated drinkware is still on the list.</p>
+      </div>
+      <div class="stack">
+        <h3>Where a partner could help</h3>
+        <ul class="open">
+          <li><b>Printing</b>UV DTF or vinyl printing with white ink, rim-safe inks, and small runs.</li>
+          <li><b>Glass sourcing</b>A tall, straight, clear shot glass with a published inside depth, in volume.</li>
+          <li><b>Venues</b>A bar or brewery willing to host a test night.</li>
+          <li><b>Game design</b>Rule sets that fit 2 to 3 rolls per fill, or tie into existing d20 games.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN QUESTIONS -->
+<section class="stack" aria-labelledby="open-h">
+  <div class="section-head"><p class="eyebrow">Open questions</p><h2 id="open-h">Not settled yet</h2></div>
+  <ul class="open">
+    <li><b>Inside floor height</b>The YULEER base thickness is estimated at 0.95 in. Every band position depends on it.</li>
+    <li><b>Readability</b>Untested: 9 to 11 pt digits through beer, at a bar table, in bar lighting.</li>
+    <li><b>Durability</b>Vendor claims only. No wash testing yet.</li>
+    <li><b>Game rules</b>Three sips to 30 needs a fix for the small glass volume.</li>
+    <li><b>Fairness</b>Players can memorize a strip. Different shuffles per glass (one number in the generator) limit that.</li>
+    <li><b>Name</b>None chosen; candidates above are unchecked.</li>
+  </ul>
+</section>
+
+<section class="stack" aria-labelledby="src-h">
+  <div class="section-head"><p class="eyebrow">Sources</p><h2 id="src-h" style="font-size:var(--s5)">References</h2></div>
+  <ol class="sources">
+    <li><a href="https://www.uncommongoods.com/product/beer-golf" target="_blank" rel="noopener">Beer Golf, Uncommon Goods</a> (product description and price)</li>
+    <li><a href="https://arxiv.org/pdf/2211.02253" target="_blank" rel="noopener">The presence of surfactants controls the stability of bubble chains in carbonated drinks, arXiv 2211.02253</a> (lager surface tension 55 mN/m)</li>
+    <li><a href="https://prefetch.eu/know/concept/meniscus" target="_blank" rel="noopener">Meniscus height at a vertical wall, prefetch.eu</a></li>
+    <li><a href="https://link.springer.com/article/10.1007/s00455-008-9183-y" target="_blank" rel="noopener">Bennett et al. 2009, Sip-sizing behaviors in natural drinking conditions, Dysphagia</a> (16 mL natural sip)</li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6110468" target="_blank" rel="noopener">Langfield et al. 2018, Impact of glass shape on time taken to drink a soft drink, PLoS ONE</a></li>
+    <li><a href="https://publishup.uni-potsdam.de/opus4-ubp/files/7988/spath08_S239-242.pdf" target="_blank" rel="noopener">University of Potsdam study of normal and maximal sip volume</a> (29 mL mean)</li>
+    <li><a href="https://stickerapp.com/materials/transparent-stickers" target="_blank" rel="noopener">StickerApp transparent stickers</a></li>
+    <li><a href="https://itsprettypersonal.com/products/custom-uv-dtf-gang-sheet-white-backed-permanent-decals-design-your-own" target="_blank" rel="noopener">It's Pretty Personal, white-backed UV DTF gang sheets</a></li>
+    <li><a href="https://dtf.613originals.com/products/upload-uv-dtf-gang-sheet-upload" target="_blank" rel="noopener">613 Originals, UV DTF gang sheet</a> (care instructions)</li>
+    <li><a href="https://help.kickstarter.com/en-us/articles/16236674-what-are-the-fees" target="_blank" rel="noopener">Kickstarter, What are the fees?</a></li>
+    <li><a href="https://laws.justice.gc.ca/eng/regulations/SOR-2016-175/FullText.html" target="_blank" rel="noopener">Glazed Ceramics and Glassware Regulations (SOR/2016-175), Canada</a></li>
+    <li><a href="https://www.amazon.com/dp/B07YC37N4K/" target="_blank" rel="noopener">YULEER 2 oz tall shot glasses, Amazon</a></li>
+  </ol>
+</section>
+
+<footer>Dave Nellis, Salida, Colorado. Working document, November 2026. Print files and the generator are available on request.</footer>
+</div>
+
+<script>
+(function () {
+  // YULEER geometry (inches) and the current zoned strip, bottom band first: [bottom, top, number]
+  var G = { r0: 0.65, r1: 0.80, H: 3.9, wall: 0.12, base: 0.95, fill: 3.65, stripTop: 3.77, stripW: 0.45 };
+  var BANDS = [[0.95,1.11,4],[1.11,1.266,2],[1.266,1.419,18],[1.419,1.569,1],[1.569,1.716,20],[1.716,1.86,16],[1.86,2.002,17],[2.002,2.141,3],[2.141,2.278,19],[2.278,2.413,5],[2.413,2.545,8],[2.545,2.675,7],[2.675,2.803,10],[2.803,2.93,6],[2.93,3.054,9],[3.054,3.177,11],[3.177,3.297,13],[3.297,3.417,15],[3.417,3.534,14],[3.534,3.65,12]];
+  var IN3_ML = 16.387;
+
+  var k = ((G.r1 - G.wall) - (G.r0 - G.wall)) / G.H;
+  var ri0 = G.r0 - G.wall;
+  function fr(h) { var r = ri0 + k * h; return Math.PI * h / 3 * (ri0 * ri0 + ri0 * r + r * r); }
+  function vol(h) { return (fr(Math.max(h, G.base)) - fr(G.base)) * IN3_ML; }
+  var FULL = vol(G.fill);
+  function heightFor(ml) {
+    var lo = G.base, hi = G.fill;
+    for (var i = 0; i < 50; i++) { var m = (lo + hi) / 2; if (vol(m) < ml) lo = m; else hi = m; }
+    return (lo + hi) / 2;
+  }
+
+  // drawing: 100 px per inch, table at y=420
+  var S = 100, Y0 = 420, CX = 120;
+  function y(h) { return Y0 - h * S; }
+  function xo(h) { return (G.r0 + (G.r1 - G.r0) * h / G.H) * S; }
+  function xi(h) { return xo(h) - G.wall * S; }
+  var NS = "http://www.w3.org/2000/svg";
+  var svg = document.getElementById("glass");
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var a in attrs) e.setAttribute(a, attrs[a]);
+    (parent || svg).appendChild(e); return e;
+  }
+  function pts(list) { return list.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "); }
+
+  // solid base
+  el("polygon", { points: pts([[CX - xo(0), y(0)], [CX + xo(0), y(0)], [CX + xo(G.base), y(G.base)], [CX - xo(G.base), y(G.base)]]),
+    fill: "var(--solid-glass)" });
+  // glass body interior tint
+  el("polygon", { points: pts([[CX - xi(G.base), y(G.base)], [CX + xi(G.base), y(G.base)], [CX + xi(G.H), y(G.H)], [CX - xi(G.H), y(G.H)]]),
+    fill: "var(--glass-fill)" });
+  // liquid
+  var liquid = el("polygon", { id: "liquid", fill: "var(--beer)" });
+  var liquidTop = el("line", { id: "liquidTop", stroke: "var(--foam)", "stroke-width": 3 });
+  // outer and inner outlines
+  el("polygon", { points: pts([[CX - xo(0), y(0)], [CX + xo(0), y(0)], [CX + xo(G.H), y(G.H)], [CX - xo(G.H), y(G.H)]]),
+    fill: "none", stroke: "var(--glass)", "stroke-width": 2, "stroke-linejoin": "round" });
+  el("polyline", { points: pts([[CX - xi(G.H), y(G.H)], [CX - xi(G.base), y(G.base)], [CX + xi(G.base), y(G.base)], [CX + xi(G.H), y(G.H)]]),
+    fill: "none", stroke: "var(--glass)", "stroke-width": 1 });
+
+  // strip (front copy), widens slightly with height
+  function hw(h) { return (G.stripW / 2) * (xo(h) / xo(0)) * S; }
+  el("polygon", { points: pts([[CX - hw(0), y(0)], [CX + hw(0), y(0)], [CX + hw(G.stripTop), y(G.stripTop)], [CX - hw(G.stripTop), y(G.stripTop)]]),
+    fill: "var(--strip-bg)", stroke: "var(--glass)", "stroke-width": 0.6 });
+  el("line", { x1: CX - hw(G.fill), x2: CX + hw(G.fill), y1: y(G.fill), y2: y(G.fill), stroke: "var(--strip-ink)", "stroke-width": 1.6 });
+  el("line", { x1: CX - hw(G.base), x2: CX + hw(G.base), y1: y(G.base), y2: y(G.base), stroke: "var(--strip-ink)", "stroke-width": 0.6 });
+  var labels = [];
+  BANDS.forEach(function (b, i) {
+    if (i > 0) {
+      var w = hw(b[0]);
+      el("line", { x1: CX - w, x2: CX - w * 0.55, y1: y(b[0]), y2: y(b[0]), stroke: "var(--strip-ink)", "stroke-width": 0.6 });
+      el("line", { x1: CX + w * 0.55, x2: CX + w, y1: y(b[0]), y2: y(b[0]), stroke: "var(--strip-ink)", "stroke-width": 0.6 });
+    }
+    var hm = (b[0] + b[1]) / 2, fs = Math.min((b[1] - b[0]) * S * 1.05, 15);
+    var t = el("text", { x: CX, y: (y(hm) + fs * 0.36).toFixed(1), "text-anchor": "middle", "font-size": fs.toFixed(1),
+      "font-family": "JetBrains Mono, ui-monospace, monospace", "font-weight": 600, fill: "var(--strip-ink)" });
+    t.textContent = b[2]; labels.push(t);
+  });
+  var t2 = el("text", { x: CX, y: y(G.base / 2) + 4, "text-anchor": "middle", "font-size": 11, "font-weight": 700,
+    "font-family": "JetBrains Mono, ui-monospace, monospace", fill: "var(--strip-ink)" }); t2.textContent = "d20";
+  // level marker
+  var levelLine = el("line", { id: "levelLine", stroke: "var(--hit)", "stroke-width": 1.5, "stroke-dasharray": "4 3" });
+  var levelTag = el("text", { id: "levelTag", "font-size": 11, "font-family": "JetBrains Mono, ui-monospace, monospace", fill: "var(--hit)", "font-weight": 600 });
+
+  var drunk = 0, lastSip = null;
+  var slider = document.getElementById("drunk"), drunkVal = document.getElementById("drunkVal");
+  var rollNum = document.getElementById("rollNum"), rollLbl = document.getElementById("rollLbl");
+  slider.max = FULL.toFixed(1);
+
+  function bandAt(h) {
+    for (var i = 0; i < BANDS.length; i++) if (h > BANDS[i][0] + 1e-6 && h <= BANDS[i][1] + 1e-6) return i;
+    return -1;
+  }
+  function render() {
+    var rem = Math.max(0, FULL - drunk);
+    var h = rem <= 0.05 ? G.base : heightFor(rem);
+    liquid.setAttribute("points", pts([[CX - xi(G.base), y(G.base)], [CX + xi(G.base), y(G.base)], [CX + xi(h), y(h)], [CX - xi(h), y(h)]]));
+    liquidTop.setAttribute("x1", CX - xi(h)); liquidTop.setAttribute("x2", CX + xi(h));
+    liquidTop.setAttribute("y1", y(h)); liquidTop.setAttribute("y2", y(h));
+    liquidTop.style.opacity = rem > 0.05 ? 1 : 0;
+    levelLine.setAttribute("x1", CX - xo(h) - 10); levelLine.setAttribute("x2", CX + xo(h) + 6);
+    levelLine.setAttribute("y1", y(h)); levelLine.setAttribute("y2", y(h));
+    levelTag.setAttribute("x", CX + xo(h) - 30); levelTag.setAttribute("y", y(h) - 5);
+    var i = bandAt(h);
+    labels.forEach(function (t, j) { t.setAttribute("fill", j === i ? "var(--hit)" : "var(--strip-ink)"); });
+    drunkVal.textContent = drunk.toFixed(1) + " mL of " + FULL.toFixed(1);
+    slider.value = drunk.toFixed(1);
+    if (rem <= 0.05) {
+      rollNum.textContent = "--"; rollLbl.textContent = "Empty. Refill to keep playing.";
+      levelTag.textContent = "";
+    } else {
+      rollNum.textContent = BANDS[i][2];
+      levelTag.textContent = "roll";
+      rollLbl.textContent = drunk < 0.05 ? "Full glass. Take a sip." :
+        (lastSip ? "Last sip " + lastSip.toFixed(0) + " mL. " : "") + (rem / FULL > 0.5 ? "Top half: middle values." : "Bottom half: extremes.");
+    }
+  }
+  document.getElementById("sipBtn").addEventListener("click", function () {
+    if (FULL - drunk <= 0.05) return;
+    var s = Math.exp(Math.log(11) + 0.4 * (Math.sqrt(-2 * Math.log(Math.random() || 1e-9)) * Math.cos(2 * Math.PI * Math.random())));
+    s = Math.max(6, Math.min(20, s));
+    lastSip = s; drunk = Math.min(FULL, drunk + s); render();
+  });
+  document.getElementById("refillBtn").addEventListener("click", function () { drunk = 0; lastSip = null; render(); });
+  slider.addEventListener("input", function () { drunk = parseFloat(slider.value) || 0; lastSip = null; render(); });
+  render();
+})();
+</script>
+
+</body>
+</html>
