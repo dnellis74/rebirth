@@ -170,6 +170,18 @@ td.n { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-spa
 .sources { font-size: var(--s1); color: var(--muted); display: grid; gap: 0.3rem; padding-left: 1.2rem; margin: 0; }
 footer { font-size: var(--s1); color: var(--muted); border-top: 1px solid var(--rule); padding-top: 1rem; }
 
+
+/* Benchmark split bar */
+.split { display: grid; gap: 0.5rem; }
+.bar { display: flex; height: 2.75rem; border-radius: 4px; overflow: hidden; border: 1px solid var(--rule); }
+.bar span { display: flex; align-items: center; padding: 0 0.6rem; font-family: var(--f-mono); font-size: 0.8rem; white-space: nowrap; overflow: hidden; }
+.bar .r { background: var(--chip); color: var(--ink); }
+.bar .b { background: var(--beer); color: #1A1307; }
+.bar .c { background: var(--ink); color: var(--bg); }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; font-size: var(--s1); color: var(--muted); }
+.legend i { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 2px; margin-right: 0.4rem; vertical-align: -0.1rem; border: 1px solid var(--rule); }
+td.src { font-size: 0.8rem; color: var(--muted); }
+
 @media (max-width: 860px) {
   .hero, .pitch, .inspo, .cols2 { grid-template-columns: minmax(0, 1fr); }
   .stage { grid-template-columns: 3rem minmax(0, 1fr); }
@@ -450,6 +462,56 @@ footer { font-size: var(--s1); color: var(--muted); border-top: 1px solid var(--
   </div>
 </section>
 
+
+<!-- BENCHMARK -->
+<section class="stack" aria-labelledby="bench-h">
+  <div class="section-head"><p class="eyebrow">Benchmark, rough estimate</p><h2 id="bench-h">What Beer Golf might cost to make</h2>
+    <p>A back-of-envelope estimate for the Uncommon Goods Beer Golf set ($34 retail: two printed 16 oz pint glasses, six scorecard coasters, a pencil, EPE foam and a box, made in China). The maker's real costs are not public. Each line below is marked as sourced or as an assumption.</p></div>
+
+  <div class="cols2">
+    <div class="stack">
+      <h3>Cost per set, two scenarios</h3>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Line</th><th>Imported at volume</th><th>US printer, 1,008 glasses</th><th>Basis</th></tr></thead>
+          <tbody>
+            <tr><td>2 printed pint glasses</td><td class="n">$1.50 to 2.50</td><td class="n">$6.30</td><td class="src">Import: assumption ($0.75 to 1.25 each). US: sourced, Libbey 16 oz with imprint at $3.15 each for 1,008</td></tr>
+            <tr><td>6 coasters + pencil</td><td class="n">$0.20 to 0.50</td><td class="n">$0.20 to 0.50</td><td class="src">Assumption</td></tr>
+            <tr><td>Box + foam insert</td><td class="n">$0.80 to 1.50</td><td class="n">$0.80 to 1.50</td><td class="src">Assumption</td></tr>
+            <tr><td>Ocean freight</td><td class="n">$0.50 to 1.20</td><td class="n">n/a</td><td class="src">Assumption</td></tr>
+            <tr><td>Import duty on glasses</td><td class="n">$0.64 to 1.06</td><td class="n">n/a</td><td class="src">42.5% total rate shown for a China-made drinking glass line in one tariff database (data date not stated)</td></tr>
+            <tr><td>Print setup</td><td class="n">in glass price</td><td class="n">$0.05</td><td class="src">Sourced: $50 setup, spread over 1,008 glasses</td></tr>
+            <tr><td><b>Landed cost</b></td><td class="n"><b>$3.64 to 6.76</b></td><td class="n"><b>$7.35 to 8.35</b></td><td class="src">Sum</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="stack">
+      <h3>Who keeps what from $34</h3>
+      <p>Gift retailers quoted in a trade publication mark up from keystone (2x wholesale) to about 2.5x. At $34 retail, that puts the brand's wholesale price at <span class="mono">$13.60 to $17.00</span>.</p>
+      <div class="split" role="img" aria-label="Split of a $34 sale at the midpoint estimate: retailer $18.70, brand gross $10.10, landed cost $5.20">
+        <div class="bar">
+          <span class="r" style="width:55%">Retailer $18.70</span>
+          <span class="b" style="width:30%">Brand $10.10</span>
+          <span class="c" style="width:15%">Cost $5.20</span>
+        </div>
+        <div class="legend"><span><i style="background:var(--chip)"></i>Retailer markup (55%)</span><span><i style="background:var(--beer)"></i>Brand gross (30%)</span><span><i style="background:var(--ink)"></i>Landed cost (15%)</span></div>
+        <p class="fine">Midpoint of the imported scenario and the 2x to 2.5x markup range. Bar widths are to scale.</p>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Scenario</th><th>Brand gross per set</th><th>Brand gross margin</th></tr></thead>
+          <tbody>
+            <tr><td>Imported at volume</td><td class="n">$6.84 to 13.36</td><td class="n">50 to 79%</td></tr>
+            <tr><td>US printer, 1,008 glasses</td><td class="n">$5.25 to 9.65</td><td class="n">39 to 57%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <p><span class="tag read">Our read</span> The glass and print are a small share of a $34 gift set; most of the price pays the retailer. Brand gross before overhead looks like $5 to $13 per set. Design, samples, breakage, returns, warehousing, marketing and the retailer's payment terms all come out of that, so net profit per set is lower and unknown. For comparison, a two-glass Dice Glass set built from the parts on hand (glasses under $1.92 each, three strips per glass, a box and a rules card at the same assumed box cost) lands at roughly $6.60 to $10.60 before labor, close to the US-printer scenario above.</p>
+</section>
+
 <!-- OPEN QUESTIONS -->
 <section class="stack" aria-labelledby="open-h">
   <div class="section-head"><p class="eyebrow">Open questions</p><h2 id="open-h">Not settled yet</h2></div>
@@ -477,6 +539,9 @@ footer { font-size: var(--s1); color: var(--muted); border-top: 1px solid var(--
     <li><a href="https://dtf.613originals.com/products/upload-uv-dtf-gang-sheet-upload" target="_blank" rel="noopener">613 Originals, UV DTF gang sheet</a> (care instructions)</li>
     <li><a href="https://help.kickstarter.com/en-us/articles/16236674-what-are-the-fees" target="_blank" rel="noopener">Kickstarter, What are the fees?</a></li>
     <li><a href="https://laws.justice.gc.ca/eng/regulations/SOR-2016-175/FullText.html" target="_blank" rel="noopener">Glazed Ceramics and Glassware Regulations (SOR/2016-175), Canada</a></li>
+    <li><a href="https://www.promotionalproductinc.com/libbey-pint-glasses-16-oz-thick-wall-glass" target="_blank" rel="noopener">Promotional Product Inc, Libbey 16 oz pint glass with imprint</a> (quantity pricing and setup fee)</li>
+    <li><a href="https://www.giftsanddec.com/business-news/what-is-your-markup-policy-is-keystone-still-the-rule/" target="_blank" rel="noopener">Gifts &amp; Decorative Accessories, What is your markup policy? Is keystone still the rule?</a></li>
+    <li><a href="https://tariffs.wove.com/us/tariff/7013.37.20.90/textured-highball-drinking-glass/from/CN" target="_blank" rel="noopener">Wove tariff lookup, HTS 7013.37.20.90 drinking glass from China</a></li>
     <li><a href="https://www.amazon.com/dp/B07YC37N4K/" target="_blank" rel="noopener">YULEER 2 oz tall shot glasses, Amazon</a></li>
   </ol>
 </section>
